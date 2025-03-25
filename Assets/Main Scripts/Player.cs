@@ -1,9 +1,11 @@
 using UnityEngine;
+using MagicPigGames;
 
 public class Player : Character
 {
     public RangedWeapon equippedWeapon;
     public Transform aimPivot; // Pivot point for aiming (e.g., the player's hand or gun base)
+    public ProgressBar healthBarUI; // Assign this from the Inspector
 
     //Shooting animation
     public Animator animator;
@@ -44,20 +46,24 @@ public class Player : Character
     }
 
     // New function to handle damage
-    public void TakeDamage(float damage)
+
+    public override void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
         Debug.Log("Player Health: " + currentHealth);
+
+        // Update health bar
+        if (healthBarUI != null)
+        {
+            float progress = currentHealth / maxHealth;
+            healthBarUI.SetProgress(progress);
+        }
 
         if (currentHealth <= 0)
         {
             Die();
         }
-    }
-
-    private void Die()
-    {
-        Debug.Log("Player is dead!");
-        Destroy(gameObject); // Or trigger a respawn system
     }
 }
