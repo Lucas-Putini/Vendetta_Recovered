@@ -7,7 +7,7 @@ public class EnemyShootScript : MonoBehaviour
     public Transform firePoint;  // Where bullets spawn
     public float shootInterval = 1.0f;  // Time between shots
     public float bulletSpeed = 10f;  // Speed of bullets
-    public float bulletLifetime = 3f;  // Time before bullets disappear
+    public float bulletLifetime = 4f;  // Time before bullets disappear
     public AudioClip gunshotSound;  // Sound effect for shooting
 
     private bool playerInRange = false;
@@ -48,9 +48,11 @@ public class EnemyShootScript : MonoBehaviour
 
     void AimAtPlayer()
     {
-        Vector2 direction = (player.position - transform.position).normalized;
+        if (firePoint == null || player == null) return;
+        
+        Vector2 direction = (player.position - firePoint.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        firePoint.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     IEnumerator ShootAtPlayer()
@@ -64,13 +66,13 @@ public class EnemyShootScript : MonoBehaviour
 
     void Shoot()
     {
-        if (player == null) return; // Ensure player exists
+        if (player == null || firePoint == null) return; // Ensure player and firePoint exist
 
         // Get the direction to the player
         Vector2 direction = (player.position - firePoint.position).normalized;
 
         // Instantiate and launch bullet
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
         if (rb != null)
@@ -87,5 +89,4 @@ public class EnemyShootScript : MonoBehaviour
         }
     }
 }
-
 

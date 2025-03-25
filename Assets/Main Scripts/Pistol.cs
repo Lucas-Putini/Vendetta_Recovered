@@ -5,6 +5,13 @@ public class Pistol : RangedWeapon
     [Header("Pistol Settings")]
     public float range = 35f;
     public LineRenderer lineRenderer;
+    private AudioSource audioSource;
+    public AudioClip gunshotSound;  // Sound effect for shooting
+    
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>(); // Get AudioSource for sound effects
+    }
 
     public override void Fire()
     {
@@ -31,6 +38,13 @@ public class Pistol : RangedWeapon
             lineRenderer.SetPosition(1, firePoint.position + firePoint.right * range);
             lineRenderer.enabled = true;
             Invoke(nameof(HideLine), 0.1f); // Hide the line after 0.1 seconds
+        }
+        
+        //handles player gunshot audio
+        if (audioSource != null && gunshotSound != null)
+        {
+            audioSource.PlayOneShot(gunshotSound);
+            Debug.Log("Playing " + gunshotSound.name);
         }
     }
 
