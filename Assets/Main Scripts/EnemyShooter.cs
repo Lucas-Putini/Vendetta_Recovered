@@ -13,10 +13,12 @@ public class EnemyShootScript : MonoBehaviour
     private bool playerInRange = false;
     private Transform player;
     private AudioSource audioSource;
+    private AIEnemyPatrol enemyPatrol; // Référence au script de patrouille
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>(); // Get AudioSource for sound effects
+        enemyPatrol = GetComponent<AIEnemyPatrol>(); // Récupérer le script de patrouille
     }
 
     void Update()
@@ -33,6 +35,11 @@ public class EnemyShootScript : MonoBehaviour
         {
             player = other.transform;
             playerInRange = true;
+            // Activer le mode agressif dans le script de patrouille
+            if (enemyPatrol != null)
+            {
+                enemyPatrol.SetAggressive(true);
+            }
             StartCoroutine(ShootAtPlayer());
         }
     }
@@ -42,15 +49,28 @@ public class EnemyShootScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            // Désactiver le mode agressif dans le script de patrouille
+            if (enemyPatrol != null)
+            {
+                enemyPatrol.SetAggressive(false);
+            }
             StopCoroutine(ShootAtPlayer());
         }
     }
 
     void AimAtPlayer()
     {
-        Vector2 direction = (player.position - transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        if (player == null) return;
+
+        // Déterminer si le joueur est à gauche ou à droite de l'ennemi
+        bool playerIsOnRight = player.position.x > transform.position.x;
+        
+        // Retourner le sprite si nécessaire
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipX = playerIsOnRight;
+        }
     }
 
     IEnumerator ShootAtPlayer()
@@ -68,14 +88,28 @@ public class EnemyShootScript : MonoBehaviour
 
         // Get the direction to the player
         Vector2 direction = (player.position - firePoint.position).normalized;
+        Debug.Log($"Direction vers le joueur: {direction}");
+
+        // Calculer l'angle pour la rotation du point de tir
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        firePoint.rotation = Quaternion.Euler(0, 0, angle);
 
         // Instantiate and launch bullet
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, angle));
+        BulletBehaviour bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
 
-        if (rb != null)
+        if (bulletBehaviour != null)
         {
-            rb.linearVelocity = direction * bulletSpeed; // Move bullet in direction of player
+            // La direction est déjà normalisée, on multiplie juste par la vitesse
+            Vector2 bulletVelocity = direction * bulletSpeed;
+            bulletBehaviour.Initialize(bulletVelocity);
+            Debug.Log($"Position de la balle: {bullet.transform.position}");
+            Debug.Log($"Rotation de la balle: {bullet.transform.rotation.eulerAngles}");
+            Debug.Log($"Vélocité de la balle: {bulletVelocity}");
+        }
+        else
+        {
+            Debug.LogError("BulletBehaviour manquant sur la balle!");
         }
 
         Destroy(bullet, bulletLifetime); // Destroy bullet after lifetime
