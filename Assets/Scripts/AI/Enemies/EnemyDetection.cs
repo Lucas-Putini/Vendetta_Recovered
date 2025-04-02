@@ -153,7 +153,7 @@ public class EnemyDetection : MonoBehaviour
             bool playerIsOnRight = _player.position.x > transform.position.x;
             
             // Retourner le sprite si nécessaire
-            _spriteRenderer.flipX = playerIsOnRight;
+            _spriteRenderer.flipX = !playerIsOnRight;
         }
     }
 

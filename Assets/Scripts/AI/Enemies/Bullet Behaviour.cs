@@ -1,32 +1,21 @@
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
-    private Vector2 velocity;
-    private float damage = 10f;
+    public float damage = 10f;
+    public float lifetime = 3f;
 
-    public void Initialize(Vector2 initialVelocity)
+    void Start()
     {
-        velocity = initialVelocity;
-        Debug.Log($"Initialisation de la balle avec vélocité: {velocity}");
+        Destroy(gameObject, lifetime);
     }
 
-    void Update()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        // Déplacer la balle dans la direction de sa vélocité
-        transform.position += (Vector3)velocity * Time.deltaTime;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        Player player = collision.GetComponent<Player>();
+        if (player != null)
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                player.TakeDamage(damage);
-                Debug.Log($"Balle a touché le joueur! Dégâts: {damage}");
-            }
+            player.TakeDamage(damage);
             Destroy(gameObject);
         }
     }
