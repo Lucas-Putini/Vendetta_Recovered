@@ -194,11 +194,8 @@ public class AIEnemyPatrol : MonoBehaviour
         // Retourner le sprite en fonction de la direction
         if (_sprite != null)
         {
-            _sprite.flipX = !_movingRight;
+            _sprite.flipX = _movingRight;
         }
-        
-        // Alternative: Retourner tout le GameObject
-        // transform.localScale = new Vector3(_movingRight ? 1f : -1f, 1f, 1f);
     }
 
     // Méthode publique pour définir l'état agressif
