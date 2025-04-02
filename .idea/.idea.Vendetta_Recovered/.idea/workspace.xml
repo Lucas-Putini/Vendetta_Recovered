@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0136746-c455-4bd3-9216-c67e3c37326f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Vendetta_Recovered/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Vendetta_Recovered/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Scripts/Pistol.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Scripts/Pistol.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab gameplay/Pistol.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab gameplay/Pistol.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab gameplay/Pistol.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab gameplay/Pistol.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Scripts/EnemyStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Scripts/EnemyStats.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +97,7 @@
       <workItem from="1742901754423" duration="2237000" />
       <workItem from="1742981880384" duration="4880000" />
       <workItem from="1742986881872" duration="1885000" />
+      <workItem from="1743345169360" duration="442000" />
     </task>
     <servers />
   </component>

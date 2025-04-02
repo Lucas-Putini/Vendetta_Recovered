@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EnemyStats : Character
 {
+    public AudioClip deathClip;
+    private AudioSource audioSource;
+    
     protected override void Start()  // ✅ Correct override
     { 
         maxHealth = 100;   // Set maxHealth
@@ -19,5 +22,12 @@ public class EnemyStats : Character
     {
         Debug.Log($"{characterName} has died!");
         Destroy(gameObject);
+        
+        //handles player gunshot audio
+        if (audioSource != null && deathClip != null)
+        {
+            audioSource.PlayOneShot(deathClip);
+            Debug.Log("Playing " + deathClip.name);
+        }
     }
 }
