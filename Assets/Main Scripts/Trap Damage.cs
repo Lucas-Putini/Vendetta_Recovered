@@ -3,10 +3,19 @@ using UnityEngine;
 
 public class TrapDamage : MonoBehaviour
 {
-    [SerializeField] private float damagePerHit = 20f; // Damage per hit
-    [SerializeField] private float damageInterval = 0.5f; // Time between damage ticks
-    [SerializeField] private float initialDamageDelay = 0f; // Delay before first damage
-    
+    [SerializeField] private float damagePerHit = 20f;
+    [SerializeField] private float damageInterval = 0.5f;
+    [SerializeField] private float initialDamageDelay = 0f;
+
+    [Header("Optional Blood Effect")]
+    [SerializeField] private GameObject bloodEffect; // Assign SawBlood here in Inspector
+
+    private void Start()
+    {
+        // Ensure blood effect is off at start
+        ActivateBloodEffect(false);
+    }
+
     private bool isDamaging = false;
     private Player currentPlayer = null;
 
@@ -18,6 +27,7 @@ public class TrapDamage : MonoBehaviour
             if (currentPlayer != null)
             {
                 isDamaging = true;
+                ActivateBloodEffect(true);
                 StartCoroutine(DamagePlayer());
             }
         }
@@ -33,19 +43,15 @@ public class TrapDamage : MonoBehaviour
 
     private IEnumerator DamagePlayer()
     {
-        // Initial delay before first damage
         if (initialDamageDelay > 0)
-        {
             yield return new WaitForSeconds(initialDamageDelay);
-        }
 
-        // Continuous damage while player is in contact
         while (isDamaging && currentPlayer != null)
         {
             currentPlayer.TakeDamage(damagePerHit);
             yield return new WaitForSeconds(damageInterval);
         }
-        
+
         StopDamaging();
     }
 
@@ -54,11 +60,19 @@ public class TrapDamage : MonoBehaviour
         isDamaging = false;
         currentPlayer = null;
         StopAllCoroutines();
+        ActivateBloodEffect(false);
     }
 
-    // Optional: Stop damaging if the trap is disabled
     private void OnDisable()
     {
         StopDamaging();
+    }
+
+    private void ActivateBloodEffect(bool isActive)
+    {
+        if (bloodEffect != null)
+        {
+            bloodEffect.SetActive(isActive);
+        }
     }
 }

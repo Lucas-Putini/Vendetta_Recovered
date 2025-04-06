@@ -7,6 +7,7 @@ public class Player : Character
     public Transform aimPivot; // Pivot point for aiming (e.g., the player's hand or gun base)
     public ProgressBar healthBarUI; // Assign this from the Inspector
 
+
     //Shooting animation
     public Animator animator;
 
