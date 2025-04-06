@@ -267,6 +267,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1273,7 +1286,52 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      key1_0: 2011034731825299770
+      key1_1: -3892787435694198407
+      key1_10: -1047172935533963487
+      key1_11: 5452857357903436022
+      key1_12: 3193181437510447691
+      key1_13: 1604980478754860667
+      key1_14: 246659189437611874
+      key1_15: -3749758063500766801
+      key1_16: 8519997912724570605
+      key1_17: -4009841042654501169
+      key1_18: -2216364496903915026
+      key1_19: 8122638801136212633
+      key1_2: 6159443038966990978
+      key1_20: -8368928860459562749
+      key1_21: -515535080832711026
+      key1_22: -339893726774285898
+      key1_23: 435463878308574797
+      key1_24: -570336699076138197
+      key1_25: -8205536307222946166
+      key1_26: 4206848350847546077
+      key1_27: -7956788915814214073
+      key1_28: 9171453537132426230
+      key1_29: -957149249114949887
+      key1_3: -9163934497578256137
+      key1_30: 5459488628976686710
+      key1_31: 8011312478516000984
+      key1_32: 7367733647363835942
+      key1_33: 57073114462553617
+      key1_34: -2671845820962837812
+      key1_35: -6733785524256906636
+      key1_36: -2524618571553863099
+      key1_37: 2123750417606210472
+      key1_38: -424836428262992982
+      key1_39: 4480091372702954733
+      key1_4: -8102677242581966587
+      key1_40: 2437088699221313252
+      key1_41: 7213654024529380921
+      key1_42: 5477948093918294340
+      key1_43: 151920235668175482
+      key1_44: -7247266978012624429
+      key1_5: 1231701859522624636
+      key1_6: -2405981540023895311
+      key1_7: -5661659629932635750
+      key1_8: -6128151499953015498
+      key1_9: -1590328619903983697
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
