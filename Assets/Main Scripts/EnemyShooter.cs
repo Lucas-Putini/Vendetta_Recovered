@@ -4,21 +4,21 @@ using UnityEngine;
 public class EnemyShootScript : MonoBehaviour
 {
     public GameObject bulletPrefab;  // Bullet prefab to instantiate
-    public Transform firePoint;  // Where bullets spawn
+    public Transform firePoint;      // Where bullets spawn
     public float shootInterval = 1.0f;  // Time between shots
-    public float bulletSpeed = 10f;  // Speed of bullets
-    public float bulletLifetime = 3f;  // Time before bullets disappear
-    public AudioClip gunshotSound;  // Sound effect for shooting
+    public float bulletSpeed = 10f;     // Speed of bullets
+    public float bulletLifetime = 3f;   // Time before bullets disappear
+    public AudioClip gunshotSound;     // Sound effect for shooting
 
     private bool playerInRange = false;
     private Transform player;
     private AudioSource audioSource;
-    private AIEnemyPatrol enemyPatrol; // Référence au script de patrouille
+    private AIEnemyPatrol enemyPatrol; // Reference to patrol script
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>(); // Get AudioSource for sound effects
-        enemyPatrol = GetComponent<AIEnemyPatrol>(); // Récupérer le script de patrouille
+        enemyPatrol = GetComponent<AIEnemyPatrol>(); // Get patrol script
     }
 
     void Update()
@@ -26,6 +26,20 @@ public class EnemyShootScript : MonoBehaviour
         if (playerInRange && player != null)
         {
             AimAtPlayer();
+
+            // Check if the player is dead, and if so, stop shooting and resume patrolling
+            Player playerScript = player.GetComponent<Player>();
+            if (playerScript != null && playerScript.IsDead)
+            {
+                Debug.Log("Player is dead. Enemy stops shooting and resumes patrolling.");
+                playerInRange = false;
+
+                if (enemyPatrol != null)
+                    enemyPatrol.SetAggressive(false); // Resume patrol
+
+                StopAllCoroutines(); // Stop shooting loop
+                player = null; // Forget the player
+            }
         }
     }
 
@@ -35,11 +49,13 @@ public class EnemyShootScript : MonoBehaviour
         {
             player = other.transform;
             playerInRange = true;
-            // Activer le mode agressif dans le script de patrouille
+
+            // Activate aggressive mode in patrol script
             if (enemyPatrol != null)
             {
                 enemyPatrol.SetAggressive(true);
             }
+
             StartCoroutine(ShootAtPlayer());
         }
     }
@@ -49,12 +65,14 @@ public class EnemyShootScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            // Désactiver le mode agressif dans le script de patrouille
+
+            // Deactivate aggressive mode in patrol script
             if (enemyPatrol != null)
             {
                 enemyPatrol.SetAggressive(false);
             }
-            StopCoroutine(ShootAtPlayer());
+
+            StopAllCoroutines(); // Stop shooting loop
         }
     }
 
@@ -62,10 +80,10 @@ public class EnemyShootScript : MonoBehaviour
     {
         if (player == null) return;
 
-        // Déterminer si le joueur est à gauche ou à droite de l'ennemi
+        // Determine if the player is to the left or right of the enemy
         bool playerIsOnRight = player.position.x > transform.position.x;
-        
-        // Retourner le sprite si nécessaire
+
+        // Flip the sprite if necessary
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -88,9 +106,9 @@ public class EnemyShootScript : MonoBehaviour
 
         // Get the direction to the player
         Vector2 direction = (player.position - firePoint.position).normalized;
-        Debug.Log($"Direction vers le joueur: {direction}");
+        Debug.Log($"Direction to player: {direction}");
 
-        // Calculer l'angle pour la rotation du point de tir
+        // Calculate angle for firePoint rotation
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         firePoint.rotation = Quaternion.Euler(0, 0, angle);
 
@@ -100,16 +118,15 @@ public class EnemyShootScript : MonoBehaviour
 
         if (bulletBehaviour != null)
         {
-            // La direction est déjà normalisée, on multiplie juste par la vitesse
             Vector2 bulletVelocity = direction * bulletSpeed;
             bulletBehaviour.Initialize(bulletVelocity);
-            Debug.Log($"Position de la balle: {bullet.transform.position}");
-            Debug.Log($"Rotation de la balle: {bullet.transform.rotation.eulerAngles}");
-            Debug.Log($"Vélocité de la balle: {bulletVelocity}");
+            Debug.Log($"Bullet position: {bullet.transform.position}");
+            Debug.Log($"Bullet rotation: {bullet.transform.rotation.eulerAngles}");
+            Debug.Log($"Bullet velocity: {bulletVelocity}");
         }
         else
         {
-            Debug.LogError("BulletBehaviour manquant sur la balle!");
+            Debug.LogError("BulletBehaviour is missing on the bullet!");
         }
 
         Destroy(bullet, bulletLifetime); // Destroy bullet after lifetime
@@ -121,5 +138,3 @@ public class EnemyShootScript : MonoBehaviour
         }
     }
 }
-
-

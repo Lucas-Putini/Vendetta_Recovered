@@ -1,5 +1,5 @@
 using UnityEngine;
-using MagicPigGames;
+using MagicPigGames;  // Ensure that any base classes like Character are accessible
 
 public class Player : Character
 {
@@ -7,9 +7,11 @@ public class Player : Character
     public Transform aimPivot; // Pivot point for aiming (e.g., the player's hand or gun base)
     public ProgressBar healthBarUI; // Assign this from the Inspector
 
-
-    //Shooting animation
+    // Shooting and death animations
     public Animator animator;
+
+    // So the enemy knows when to stop shooting
+    public bool IsDead => currentHealth <= 0;
 
     private void Start()
     {
@@ -23,10 +25,12 @@ public class Player : Character
     private void Update()
     {
         AimWeapon();
-        if (Input.GetMouseButtonDown(0)) // Fire on left mouse click
+
+        // Prevent shooting if dead
+        if (Input.GetMouseButtonDown(0) && currentHealth > 0)
         {
             equippedWeapon.Fire();
-            animator.SetTrigger("Shoot"); // animation
+            animator.SetTrigger("Shoot"); // Play shooting animation
         }
     }
 
@@ -46,27 +50,51 @@ public class Player : Character
         aimPivot.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // New function to handle damage
-
+    // Damage handling
     public override void TakeDamage(float damage)
     {
+        // If already dead, ignore any further damage.
+        if (IsDead)
+            return;
+
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        animator.SetTrigger("Hurt");
-
-        Debug.Log("Player Health: " + currentHealth);
-
-        // Update health bar
+        // Update health bar if needed
         if (healthBarUI != null)
         {
             float progress = currentHealth / maxHealth;
             healthBarUI.SetProgress(progress);
         }
 
+        // If fatal damage is taken, trigger death immediately
         if (currentHealth <= 0)
         {
+            // Set death flag in animator before calling Die()
+            animator.SetBool("IsDead", true);
             Die();
+            return;
         }
+
+        // If still alive, trigger the hurt animation
+        animator.SetTrigger("Hurt");
+        Debug.Log("Player Health: " + currentHealth);
+    }
+
+
+    // New death logic
+    protected override void Die()
+    {
+        // Set death animation flag
+        animator.SetBool("IsDead", true);
+
+        // Optional: Disable player input or weapon scripts here
+        // Example: GetComponent<PlayerMovement>().enabled = false;
+
+        // Disable this script to stop Update()
+        this.enabled = false;
+
+        // Optional: Delay destruction to allow death animation to play
+        Destroy(gameObject, 2f); // Adjust time to match your animation duration
     }
 }
