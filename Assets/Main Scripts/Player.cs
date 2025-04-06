@@ -53,6 +53,8 @@ public class Player : Character
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
+        animator.SetTrigger("Hurt");
+
         Debug.Log("Player Health: " + currentHealth);
 
         // Update health bar

@@ -1,52 +1,31 @@
 fileFormatVersion: 2
-guid: 5d1fe3a897ac6420c8b2a677f5850c24
+guid: d2496f75f35af244fb354033cd9db541
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8848832869020687398
-    second: key box car_0
+      213: 2649847697073447219
+    second: Dead_0
   - first:
-      213: 4087787537079267622
-    second: key box car_1
+      213: -8293461521501190705
+    second: Dead_1
   - first:
-      213: -5076917703399493873
-    second: key box car_2
+      213: -1631342717326862633
+    second: Dead_2
   - first:
-      213: -4780304986641689879
-    second: key box car_3
+      213: -3927913518680497933
+    second: Dead_3
   - first:
-      213: 463195243267966975
-    second: key box car_4
+      213: -1057675302478342458
+    second: Dead_4
   - first:
-      213: -899850078775275351
-    second: key box car_5
+      213: -7954960911384535938
+    second: Dead_5
   - first:
-      213: 4531812553967463791
-    second: key box car_6
+      213: -1451345828014226549
+    second: Dead_6
   - first:
-      213: 6559272852406413995
-    second: key box car_7
-  - first:
-      213: 4254729988259986809
-    second: key box car_8
-  - first:
-      213: -1686334909191693697
-    second: key box car_9
-  - first:
-      213: 3306243433298181761
-    second: key box car_10
-  - first:
-      213: 6812709128509025979
-    second: key box car_11
-  - first:
-      213: 6837019207556735581
-    second: key box car_12
-  - first:
-      213: -2225289947444612102
-    second: key box car_13
-  - first:
-      213: -1041187912491772299
-    second: key box car_14
+      213: -2214552090018719568
+    second: Dead_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -165,7 +144,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: iOS
+    buildTarget: tvOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -178,7 +157,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: tvOS
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -194,57 +173,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: key box car_0
+      name: Dead_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 172
-        width: 1523
-        height: 852
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 62c57ca7c9e5dca70800000000000000
-      internalID: 8848832869020687398
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_1
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 335
-        width: 267
-        height: 294
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 621f0e06b1dbab830800000000000000
-      internalID: 4087787537079267622
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_2
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 22
         y: 0
-        width: 89
-        height: 248
+        width: 35
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,20 +188,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0f2bf65f3a2b89b0800000000000000
-      internalID: -5076917703399493873
+      spriteID: 33123f4e07626c420800000000000000
+      internalID: 2649847697073447219
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: key box car_3
+      name: Dead_1
       rect:
         serializedVersion: 2
-        x: 99
+        x: 144
         y: 0
-        width: 134
-        height: 249
+        width: 41
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,130 +210,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9e2913911f1f8adb0800000000000000
-      internalID: -4780304986641689879
+      spriteID: fc50d84dfa4b7ec80800000000000000
+      internalID: -8293461521501190705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: key box car_4
+      name: Dead_2
       rect:
         serializedVersion: 2
-        x: 259
-        y: 19
-        width: 118
-        height: 230
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ff743a0ae999d6600800000000000000
-      internalID: 463195243267966975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_5
-      rect:
-        serializedVersion: 2
-        x: 374
-        y: 1
-        width: 169
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9a01e77fe171383f0800000000000000
-      internalID: -899850078775275351
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_6
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 5
-        width: 122
-        height: 241
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f6de2ebd18b34ee30800000000000000
-      internalID: 4531812553967463791
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_7
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 183
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: baa2c8028e7370b50800000000000000
-      internalID: 6559272852406413995
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_8
-      rect:
-        serializedVersion: 2
-        x: 719
-        y: 9
-        width: 122
-        height: 238
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 97d307db166db0b30800000000000000
-      internalID: 4254729988259986809
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_9
-      rect:
-        serializedVersion: 2
-        x: 852
+        x: 270
         y: 0
-        width: 149
-        height: 248
+        width: 57
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,20 +232,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f7ad94da55fe898e0800000000000000
-      internalID: -1686334909191693697
+      spriteID: 7d6dfca117e4c59e0800000000000000
+      internalID: -1631342717326862633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: key box car_10
+      name: Dead_3
       rect:
         serializedVersion: 2
-        x: 1015
+        x: 326
+        y: 58
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f0289a377f3d79c0800000000000000
+      internalID: -3927913518680497933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dead_4
+      rect:
+        serializedVersion: 2
+        x: 398
         y: 0
-        width: 130
-        height: 248
+        width: 71
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -429,20 +276,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 18eb4b6a2e222ed20800000000000000
-      internalID: 3306243433298181761
+      spriteID: 6c6131c8ae16251f0800000000000000
+      internalID: -1057675302478342458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: key box car_11
+      name: Dead_5
       rect:
         serializedVersion: 2
-        x: 1183
-        y: 1
-        width: 121
-        height: 245
+        x: 467
+        y: 21
+        width: 19
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -451,20 +298,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bbe67da6bda9b8e50800000000000000
-      internalID: 6812709128509025979
+      spriteID: e7c9ec2c23d4a9190800000000000000
+      internalID: -7954960911384535938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: key box car_12
+      name: Dead_6
       rect:
         serializedVersion: 2
-        x: 1183
-        y: 75
-        width: 6
-        height: 116
+        x: 526
+        y: 0
+        width: 74
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,20 +320,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5221f4ceb8f1ee50800000000000000
-      internalID: 6837019207556735581
+      spriteID: b8387f2b8a8cbdbe0800000000000000
+      internalID: -1451345828014226549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: key box car_13
+      name: Dead_7
       rect:
         serializedVersion: 2
-        x: 1335
-        y: 17
-        width: 170
-        height: 229
+        x: 602
+        y: 0
+        width: 15
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -495,30 +342,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af3f058359e2e11e0800000000000000
-      internalID: -2225289947444612102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: key box car_14
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 79
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5765f7b2c15fc81f0800000000000000
-      internalID: -1041187912491772299
+      spriteID: 0b8d5d97b945441e0800000000000000
+      internalID: -2214552090018719568
       vertices: []
       indices: 
       edges: []
@@ -536,22 +361,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      key box car_0: 8848832869020687398
-      key box car_1: 4087787537079267622
-      key box car_10: 3306243433298181761
-      key box car_11: 6812709128509025979
-      key box car_12: 6837019207556735581
-      key box car_13: -2225289947444612102
-      key box car_14: -1041187912491772299
-      key box car_2: -5076917703399493873
-      key box car_3: -4780304986641689879
-      key box car_4: 463195243267966975
-      key box car_5: -899850078775275351
-      key box car_6: 4531812553967463791
-      key box car_7: 6559272852406413995
-      key box car_8: 4254729988259986809
-      key box car_9: -1686334909191693697
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
