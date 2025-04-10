@@ -10,6 +10,9 @@ public class Player : Character
     // Shooting and death animations
     public Animator animator;
 
+    // Death menu reference
+    private DeathMenu deathMenu;
+
     // So the enemy knows when to stop shooting
     public bool IsDead => currentHealth <= 0;
 
@@ -17,6 +20,11 @@ public class Player : Character
     {
         maxHealth = 100f;
         currentHealth = maxHealth;
+
+        // Get reference to death menu
+        deathMenu = FindObjectOfType<DeathMenu>();
+        if (deathMenu == null)
+            Debug.LogWarning("DeathMenu not found in the scene!");
 
         if (equippedWeapon == null)
             Debug.LogError("No weapon equipped!");
@@ -88,8 +96,9 @@ public class Player : Character
         // Set death animation flag
         animator.SetBool("IsDead", true);
 
-        // Optional: Disable player input or weapon scripts here
-        // Example: GetComponent<PlayerMovement>().enabled = false;
+        // Show death menu
+        if (deathMenu != null)
+            deathMenu.ShowDeathMenu();
 
         // Disable this script to stop Update()
         this.enabled = false;
