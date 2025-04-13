@@ -24,13 +24,19 @@ public class PlayerController : MonoBehaviour
     private float dashTimeLeft;
     private float lastDashTime;
 
+    [Header("Crouch Settings")]
+    public float crouchSpeedMultiplier = 0.5f; // Slower movement when crouching
+    private bool isCrouching = false;
+    public Collider2D standingCollider;
+    public Collider2D crouchingCollider;
+
     // LUCAS - Jump Limit
     private int jumpCount = 0; // For tracking how many jumps
     private int maxJumps = 2; // Maximum allowed jumps (double jump)
 
-    //Animation
+    // Animation
     public Animator animator; // For accessing the animator component
-    private bool isFacingRight = true; // to manage which way the animation is fancing
+    private bool isFacingRight = true; // To manage which way the animation is facing
 
     void Start()
     {
@@ -39,23 +45,24 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Ground Check (Detects if the player is touching the ground)
+        // Ground Check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
         // Handle movement
         float moveInput = Input.GetAxisRaw("Horizontal");
+        float currentSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
 
         // Handle animation flip
         HandleFlip(moveInput);
 
         if (!isDashing)
         {
-            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
         }
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
 
-        // Handle jumping // LUCAS: let's see if the jump limit works, I also changed the jump key from spacebar to W
+        // Handle jumping
         if (Input.GetKeyDown(KeyCode.W) && (jumpCount < maxJumps))
         {
             PlayerJump();
@@ -79,14 +86,24 @@ public class PlayerController : MonoBehaviour
                 isDashing = false;
             }
         }
+
+        // Handle crouching
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCrouch();
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            StopCrouch();
+        }
     }
 
     void PlayerJump()
     {
         rb.AddForce(new Vector2(rb.linearVelocity.x, jumpForce));
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
-        jumpCount++; // Increment jump count
-        animator.SetBool("IsJumping", true); //  Trigger jumping anim
+        jumpCount++;
+        animator.SetBool("IsJumping", true);
         Debug.Log("jump worked");
     }
 
@@ -96,24 +113,21 @@ public class PlayerController : MonoBehaviour
         dashTimeLeft = dashDuration;
         lastDashTime = Time.time;
 
-        // Apply dash speed in the direction of movement
         float dashDirection = moveDirection != 0 ? moveDirection : transform.localScale.x;
         rb.linearVelocity = new Vector2(dashDirection * dashSpeed, rb.linearVelocity.y);
     }
 
-    //This checks if the player hit the ground ("Ground" tag), if so, the jump count goes back to 0
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            jumpCount = 0; // Reset jumps when touching the ground
-            animator.SetBool("IsJumping", false); // Reset jumping animation
+            jumpCount = 0;
+            animator.SetBool("IsJumping", false);
             Debug.Log("Touched Ground, Jumps Reset");
         }
     }
 
-    //for flipping the animation
-    void HandleFlip(float moveInput) // checks the movement input and flips only when needed
+    void HandleFlip(float moveInput)
     {
         if (moveInput > 0 && !isFacingRight)
         {
@@ -125,7 +139,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Flip() // toggles the x scale to mirror the sprite
+    void Flip()
     {
         isFacingRight = !isFacingRight;
         Vector3 scale = transform.localScale;
@@ -133,16 +147,38 @@ public class PlayerController : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // Méthode pour donner la clé au joueur
     public void GiveKey()
     {
         hasKey = true;
         Debug.Log("Le joueur a reçu la clé !");
     }
 
-    // Méthode pour vérifier si le joueur a la clé
     public bool HasKey()
     {
         return hasKey;
+    }
+
+    void StartCrouch()
+    {
+        isCrouching = true;
+        animator.SetBool("IsCrouching", true);
+
+        if (standingCollider != null && crouchingCollider != null)
+        {
+            standingCollider.enabled = false;
+            crouchingCollider.enabled = true;
+        }
+    }
+
+    void StopCrouch()
+    {
+        isCrouching = false;
+        animator.SetBool("IsCrouching", false);
+
+        if (standingCollider != null && crouchingCollider != null)
+        {
+            crouchingCollider.enabled = false;
+            standingCollider.enabled = true;
+        }
     }
 }
