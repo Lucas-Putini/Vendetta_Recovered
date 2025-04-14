@@ -181,4 +181,10 @@ public class PlayerController : MonoBehaviour
             standingCollider.enabled = true;
         }
     }
+
+    public bool IsCrouching()
+    {
+        return isCrouching;
+    }
+
 }
