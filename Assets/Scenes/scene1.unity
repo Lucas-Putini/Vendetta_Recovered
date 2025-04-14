@@ -23186,6 +23186,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1742772669287748956, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
   m_PrefabInstance: {fileID: 7482104483171778890}
   m_PrefabAsset: {fileID: 0}
+--- !u!70 &5154449029895305337 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2238864816332705556, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
+  m_PrefabInstance: {fileID: 7482104483171778890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5165567258985605359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23299,6 +23304,30 @@ PrefabInstance:
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 223380938}
+    - target: {fileID: 3944295303080203178, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
+      propertyPath: standingSize.x
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3944295303080203178, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
+      propertyPath: standingSize.y
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 3944295303080203178, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
+      propertyPath: capsuleCollider
+      value: 
+      objectReference: {fileID: 5154449029895305337}
+    - target: {fileID: 3944295303080203178, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
+      propertyPath: crouchingSize.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3944295303080203178, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
+      propertyPath: crouchingSize.y
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 3944295303080203178, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
+      propertyPath: crouchingOffset.y
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5184429471461062662, guid: a7be99da02195e84bb1bb7b0c6fd029e, type: 3}
       propertyPath: m_Name
       value: Player 1
