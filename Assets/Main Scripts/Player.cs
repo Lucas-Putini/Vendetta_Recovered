@@ -88,13 +88,13 @@ public class Player : Character
         // Set death animation flag
         animator.SetBool("IsDead", true);
 
-        // Optional: Disable player input or weapon scripts here
-        // Example: GetComponent<PlayerMovement>().enabled = false;
-
-        // Disable this script to stop Update()
+        // Disable player controls
         this.enabled = false;
 
-        // Optional: Delay destruction to allow death animation to play
-        Destroy(gameObject, 2f); // Adjust time to match your animation duration
+        // Show death menu
+        DeathMenu.Instance.ShowDeathMenu();
+
+        // We no longer destroy the player immediately
+        // Destroy(gameObject, 2f); // This line is commented out because we want to keep the player for the death animation
     }
 }
