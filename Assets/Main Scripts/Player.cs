@@ -89,5 +89,6 @@ public class Player : Character
         animator.SetBool("IsDead", true);
         this.enabled = false;
         Destroy(gameObject, 2f); // Adjust time to match your animation duration
+        DeathMenu.Instance.ShowDeathMenu();
     }
 }
