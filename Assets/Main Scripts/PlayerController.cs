@@ -25,23 +25,18 @@ public class PlayerController : MonoBehaviour
     private float lastDashTime;
 
     [Header("Crouch Settings")]
-    public float crouchSpeedMultiplier = 0.5f;
+    public float crouchSpeedMultiplier = 0.5f; // Slower movement when crouching
     private bool isCrouching = false;
-
-    [Header("Crouch Collider Settings")]
-    public CapsuleCollider2D capsuleCollider;
-    public Vector2 standingSize = new Vector2(1f, 2f);
-    public Vector2 crouchingSize = new Vector2(1f, 1f);
-    public Vector2 standingOffset = new Vector2(0f, 0f);
-    public Vector2 crouchingOffset = new Vector2(0f, -0.5f);
+    public Collider2D standingCollider;
+    public Collider2D crouchingCollider;
 
     // LUCAS - Jump Limit
-    private int jumpCount = 0;
-    private int maxJumps = 2;
+    private int jumpCount = 0; // For tracking how many jumps
+    private int maxJumps = 2; // Maximum allowed jumps (double jump)
 
     // Animation
-    public Animator animator;
-    private bool isFacingRight = true;
+    public Animator animator; // For accessing the animator component
+    private bool isFacingRight = true; // To manage which way the animation is facing
 
     void Start()
     {
@@ -168,10 +163,10 @@ public class PlayerController : MonoBehaviour
         isCrouching = true;
         animator.SetBool("IsCrouching", true);
 
-        if (capsuleCollider != null)
+        if (standingCollider != null && crouchingCollider != null)
         {
-            capsuleCollider.size = crouchingSize;
-            capsuleCollider.offset = crouchingOffset;
+            standingCollider.enabled = false;
+            crouchingCollider.enabled = true;
         }
     }
 
@@ -180,15 +175,10 @@ public class PlayerController : MonoBehaviour
         isCrouching = false;
         animator.SetBool("IsCrouching", false);
 
-        if (capsuleCollider != null)
+        if (standingCollider != null && crouchingCollider != null)
         {
-            capsuleCollider.size = standingSize;
-            capsuleCollider.offset = standingOffset;
+            crouchingCollider.enabled = false;
+            standingCollider.enabled = true;
         }
-    }
-
-    public bool IsCrouching()
-    {
-        return isCrouching;
     }
 }

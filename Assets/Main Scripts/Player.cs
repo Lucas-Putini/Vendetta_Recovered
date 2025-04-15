@@ -24,23 +24,14 @@ public class Player : Character
 
     private void Update()
     {
+        AimWeapon();
+
+        // Prevent shooting if dead
         if (Input.GetMouseButtonDown(0) && currentHealth > 0)
         {
             equippedWeapon.Fire();
-
-            // Check if crouching
-            PlayerController controller = GetComponent<PlayerController>();
-            if (controller != null && controller.IsCrouching())
-            {
-                animator.SetTrigger("CrouchShoot");
-            }
-            else
-            {
-                animator.SetTrigger("Shoot");
-            }
+            animator.SetTrigger("Shoot"); // Play shooting animation
         }
-
-        AimWeapon(); // Don't forget to keep this active!
     }
 
     private void AimWeapon()
@@ -59,35 +50,41 @@ public class Player : Character
         aimPivot.rotation = Quaternion.Euler(0, 0, angle);
     }
 
+    // Damage handling
     public override void TakeDamage(float damage)
     {
+        // If already dead, ignore any further damage.
         if (IsDead)
             return;
 
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
+        // Update health bar if needed
         if (healthBarUI != null)
         {
             float progress = currentHealth / maxHealth;
             healthBarUI.SetProgress(progress);
         }
 
+        // If fatal damage is taken, trigger death immediately
         if (currentHealth <= 0)
         {
+            // Set death flag in animator before calling Die()
             animator.SetBool("IsDead", true);
             Die();
             return;
         }
 
+        // If still alive, trigger the hurt animation
         animator.SetTrigger("Hurt");
         Debug.Log("Player Health: " + currentHealth);
     }
 
+
+    // New death logic
     protected override void Die()
     {
+        // Set death animation flag
         animator.SetBool("IsDead", true);
-        this.enabled = false;
-        Destroy(gameObject, 2f); // Adjust time to match your animation duration
-    }
 }
