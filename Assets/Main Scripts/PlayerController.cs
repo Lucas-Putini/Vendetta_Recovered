@@ -50,6 +50,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Vérifie si le menu de mort est actif
+        if (DeathMenu.Instance != null && DeathMenu.Instance.deathMenuUI != null && DeathMenu.Instance.deathMenuUI.activeSelf)
+        {
+            // Arrête tout mouvement si le menu de mort est actif
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            return;
+        }
+
         // Ground Check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
@@ -134,6 +142,12 @@ public class PlayerController : MonoBehaviour
 
     void HandleFlip(float moveInput)
     {
+        // Ne pas retourner le personnage si le menu de mort est actif
+        if (DeathMenu.Instance != null && DeathMenu.Instance.deathMenuUI != null && DeathMenu.Instance.deathMenuUI.activeSelf)
+        {
+            return;
+        }
+
         if (moveInput > 0 && !isFacingRight)
         {
             Flip();
