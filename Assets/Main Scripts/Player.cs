@@ -87,7 +87,13 @@ public class Player : Character
     protected override void Die()
     {
         animator.SetBool("IsDead", true);
+        // Disable player controls
         this.enabled = false;
-        Destroy(gameObject, 2f); // Adjust time to match your animation duration
+
+        // Show death menu
+        DeathMenu.Instance.ShowDeathMenu();
+
+        // We no longer destroy the player immediately
+        // Destroy(gameObject, 2f); // This line is commented out because we want to keep the player for the death animation
     }
 }
