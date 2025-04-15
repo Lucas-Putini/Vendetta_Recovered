@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MainChar_Crouch
+  m_Name: MainChar_CrouchShoot
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -720845374110625593, guid: 5624cf8698672de4aa11b8ffcf1721ab, type: 3}
+      value: {fileID: -2053986724, guid: cb7a7d7899aa2be438e05b97d44de7a8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -720845374110625593, guid: 5624cf8698672de4aa11b8ffcf1721ab, type: 3}
+    - {fileID: -2053986724, guid: cb7a7d7899aa2be438e05b97d44de7a8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
