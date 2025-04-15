@@ -30,22 +30,44 @@ public class Player : Character
             return; // Sort de la fonction si le menu de mort est actif
         }
 
-        AimWeapon();
-
-        if (Input.GetMouseButtonDown(0) && currentHealth > 0)
+        // Vérifie si le mode auto-aim est activé
+        if (GameSettings.Instance != null && GameSettings.Instance.autoAimMode)
         {
-            equippedWeapon.Fire();
+            // En mode auto-aim, on ne fait pas pivoter l'arme
+            // L'arme reste alignée avec la direction du personnage
+            aimPivot.rotation = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? 0 : 180);
+            
+            // Tirer avec la touche Espace
+            if (Input.GetKeyDown(GameSettings.Instance.autoAimKey) && currentHealth > 0)
+            {
+                FireWeapon();
+            }
+        }
+        else
+        {
+            // Mode de visée normal avec la souris
+            AimWeapon();
 
-            // Check if crouching
-            PlayerController controller = GetComponent<PlayerController>();
-            if (controller != null && controller.IsCrouching())
+            if (Input.GetMouseButtonDown(0) && currentHealth > 0)
             {
-                animator.SetTrigger("CrouchShoot");
+                FireWeapon();
             }
-            else
-            {
-                animator.SetTrigger("Shoot");
-            }
+        }
+    }
+
+    private void FireWeapon()
+    {
+        equippedWeapon.Fire();
+
+        // Check if crouching
+        PlayerController controller = GetComponent<PlayerController>();
+        if (controller != null && controller.IsCrouching())
+        {
+            animator.SetTrigger("CrouchShoot");
+        }
+        else
+        {
+            animator.SetTrigger("Shoot");
         }
     }
 
