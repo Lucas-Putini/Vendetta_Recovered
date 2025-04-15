@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameSettings : MonoBehaviour
 {
@@ -34,25 +35,74 @@ public class GameSettings : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Réinitialiser les références UI et cacher le menu des paramètres
+        SetupUIReferences();
+        HideSettingsMenu();
+    }
+
     private void Start()
     {
-        // Initialize UI elements
-        if (settingsMenuUI != null)
-            settingsMenuUI.SetActive(false);
-        
-        if (mainMenuUI != null)
-            mainMenuUI.SetActive(true);
+        SetupUIReferences();
+        HideSettingsMenu();
+    }
 
-        // Setup toggle listener
+    private void SetupUIReferences()
+    {
+        // Trouver les éléments UI dans la scène
+        if (settingsMenuUI == null)
+        {
+            settingsMenuUI = GameObject.Find("SettingsMenuUI");
+        }
+        
+        if (mainMenuUI == null)
+        {
+            mainMenuUI = GameObject.Find("MainMenuUI");
+        }
+
+        // Configurer les toggles
+        if (highContrastToggle == null && settingsMenuUI != null)
+        {
+            highContrastToggle = settingsMenuUI.GetComponentInChildren<Toggle>();
+        }
+
+        if (autoAimToggle == null && settingsMenuUI != null)
+        {
+            // Chercher le toggle d'auto-aim
+            Toggle[] toggles = settingsMenuUI.GetComponentsInChildren<Toggle>();
+            foreach (Toggle toggle in toggles)
+            {
+                if (toggle.gameObject.name.Contains("AutoAim"))
+                {
+                    autoAimToggle = toggle;
+                    break;
+                }
+            }
+        }
+
+        // Configurer les listeners
         if (highContrastToggle != null)
         {
             highContrastToggle.isOn = highContrastMode;
+            highContrastToggle.onValueChanged.RemoveAllListeners();
             highContrastToggle.onValueChanged.AddListener(SetHighContrastMode);
         }
 
         if (autoAimToggle != null)
         {
             autoAimToggle.isOn = autoAimMode;
+            autoAimToggle.onValueChanged.RemoveAllListeners();
             autoAimToggle.onValueChanged.AddListener(SetAutoAimMode);
         }
     }
@@ -66,13 +116,18 @@ public class GameSettings : MonoBehaviour
             mainMenuUI.SetActive(false);
     }
 
-    public void ReturnToMainMenu()
+    public void HideSettingsMenu()
     {
         if (settingsMenuUI != null)
             settingsMenuUI.SetActive(false);
         
         if (mainMenuUI != null)
             mainMenuUI.SetActive(true);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        HideSettingsMenu();
     }
 
     public void SetHighContrastMode(bool enabled)
