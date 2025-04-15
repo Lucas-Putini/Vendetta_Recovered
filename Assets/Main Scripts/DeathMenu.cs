@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; // Add this for Button type
+using System.Collections;
 
 public class DeathMenu : MonoBehaviour
 {
-    public GameObject deathMenuUI; // Reference to the death menu canvas
+    public GameObject deathMenuUI { get; private set; }
     public Button restartButton;   // Reference to the restart button
     public Button menuButton;      // Reference to the main menu button
+    public float deathMenuDelay = 1.5f; // Délai avant l'apparition du menu de mort
 
     private static DeathMenu instance;
     public static DeathMenu Instance { get { return instance; } }
@@ -88,6 +90,15 @@ public class DeathMenu : MonoBehaviour
 
     public void ShowDeathMenu()
     {
+        StartCoroutine(ShowDeathMenuWithDelay());
+    }
+
+    private IEnumerator ShowDeathMenuWithDelay()
+    {
+        // Attendre le délai spécifié
+        yield return new WaitForSecondsRealtime(deathMenuDelay);
+
+        // Afficher le menu de mort
         if (deathMenuUI != null)
         {
             deathMenuUI.SetActive(true);

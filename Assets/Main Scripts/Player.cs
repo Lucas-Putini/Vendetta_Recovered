@@ -24,6 +24,14 @@ public class Player : Character
 
     private void Update()
     {
+        // Vérifie si le menu de mort est actif
+        if (DeathMenu.Instance != null && DeathMenu.Instance.deathMenuUI != null && DeathMenu.Instance.deathMenuUI.activeSelf)
+        {
+            return; // Sort de la fonction si le menu de mort est actif
+        }
+
+        AimWeapon();
+
         if (Input.GetMouseButtonDown(0) && currentHealth > 0)
         {
             equippedWeapon.Fire();
@@ -39,8 +47,6 @@ public class Player : Character
                 animator.SetTrigger("Shoot");
             }
         }
-
-        AimWeapon(); // Don't forget to keep this active!
     }
 
     private void AimWeapon()
