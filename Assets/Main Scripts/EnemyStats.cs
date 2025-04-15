@@ -29,13 +29,17 @@ public class EnemyStats : Character
     protected override void Die()
     {
         Debug.Log($"{characterName} has died!");
-        Destroy(gameObject);
-        
-        //handles player gunshot audio
+
         if (audioSource != null && deathClip != null)
         {
             audioSource.PlayOneShot(deathClip);
             Debug.Log("Playing " + deathClip.name);
+            Destroy(gameObject, deathClip.length); // ✅ Delay destruction
+        }
+        else
+        {
+            Destroy(gameObject); // fallback if clip is missing
         }
     }
+
 }
