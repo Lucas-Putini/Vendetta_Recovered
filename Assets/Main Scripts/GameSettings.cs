@@ -11,10 +11,15 @@ public class GameSettings : MonoBehaviour
     public Color highContrastForegroundColor = Color.white;
     public Color highContrastAccentColor = Color.yellow;
 
+    [Header("Accessibility Settings")]
+    public bool autoAimMode = false;
+    public KeyCode autoAimKey = KeyCode.Space;
+
     [Header("UI References")]
     public GameObject settingsMenuUI;
     public GameObject mainMenuUI;
     public Toggle highContrastToggle;
+    public Toggle autoAimToggle;
 
     private void Awake()
     {
@@ -43,6 +48,12 @@ public class GameSettings : MonoBehaviour
         {
             highContrastToggle.isOn = highContrastMode;
             highContrastToggle.onValueChanged.AddListener(SetHighContrastMode);
+        }
+
+        if (autoAimToggle != null)
+        {
+            autoAimToggle.isOn = autoAimMode;
+            autoAimToggle.onValueChanged.AddListener(SetAutoAimMode);
         }
     }
 
@@ -113,5 +124,10 @@ public class GameSettings : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetAutoAimMode(bool enabled)
+    {
+        autoAimMode = enabled;
     }
 } 
