@@ -4,16 +4,15 @@ using System.Collections.Generic;
 
 public class EnemyMelee : MonoBehaviour
 {
-    
-    private bool playerInRange = false; // Flag to check if the player is in range
+    private bool playerInRange = false;
     private Transform player;
 
-    [Header("Melee Attack Settings")] 
-    public float meleeDamage = 10f; // Damage dealt by the melee attack
-    public float attackCooldown = 1f; // Time between attacks
-    private float lastAttackTime; // Time of the last attack
-    public float attackRange = 1f; // Range of the melee attack
-    public float chaseSpeed = 2f; // Speed of the enemy when chasing the player�
+    [Header("Melee Attack Settings")]
+    public float meleeDamage = 10f;
+    public float attackCooldown = 1f;
+    private float lastAttackTime;
+    public float attackRange = 1f;
+    public float chaseSpeed = 2f;
 
     [Header("Movement & Physics")]
     public float jumpForce = 6f;
@@ -23,17 +22,14 @@ public class EnemyMelee : MonoBehaviour
     private Rigidbody2D rb;
     private bool isFacingRight = true;
 
+    // Animator reference
+    private Animator animator;
 
-    // detect player by tag if they enter the co
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
-   
-
 
     void Update()
     {
@@ -50,35 +46,43 @@ public class EnemyMelee : MonoBehaviour
                 StartCoroutine(AttackPlayer());
             }
         }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
+
+        animator.SetBool("isJumping", !IsGrounded());
     }
-
-
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Player entered detection range");
-        playerInRange = true;
-        player = other.transform; // <-- you were missing this in the copy you just posted!
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player entered detection range");
+            playerInRange = true;
+            player = other.transform;
+        }
     }
 
-      void ChasePlayer()
+    void ChasePlayer()
     {
         if (player == null) return;
 
         Vector2 direction = (player.position - transform.position).normalized;
         rb.linearVelocity = new Vector2(direction.x * chaseSpeed, rb.linearVelocity.y);
 
-        // Flip enemy sprite based on direction
+        animator.SetBool("isRunning", true);
+
         if (direction.x > 0 && !isFacingRight)
             Flip();
         else if (direction.x < 0 && isFacingRight)
             Flip();
 
-        // Check if we should jump over an obstacle
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, 0.5f, groundLayer);
         if (hit.collider != null && IsGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            animator.SetBool("isJumping", true);
         }
     }
 
@@ -86,10 +90,11 @@ public class EnemyMelee : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
-        // Delay to match animation hit frame if needed
+        // Trigger punch animation
+        animator.SetTrigger("punch");
+
         yield return new WaitForSeconds(0.2f);
 
-        // Check for collision with player using Physics2D.OverlapCircle (you can replace this with a melee hitbox)
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position + transform.right * 0.5f, attackRange);
         foreach (var hit in hits)
         {
@@ -102,6 +107,21 @@ public class EnemyMelee : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        // You'd subtract health here
+        animator.SetTrigger("hurt");
+        // If health <= 0: Die();
+    }
+
+    public void Die()
+    {
+        animator.SetTrigger("die");
+        // Disable enemy logic (colliders, movement, etc.)
+        this.enabled = false;
+        rb.linearVelocity = Vector2.zero;
     }
 
     private void Flip()
@@ -119,18 +139,10 @@ public class EnemyMelee : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Visualize melee range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + transform.right * 0.5f, attackRange);
 
-        // Ground check gizmo
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }
-
-
-  
-
-    
-    
