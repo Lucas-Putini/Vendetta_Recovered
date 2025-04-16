@@ -259,8 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Mafiaboss1
   maxHealth: 100
-  deathClip: {fileID: 0}
-  hurtClip: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: 2d03b17285d900b4b907ff89060d5613, type: 3}
+  hurtClip: {fileID: 8300000, guid: 8864187471289804caf0a4b663d47a9c, type: 3}
 --- !u!114 &6480675444555248584
 MonoBehaviour:
   m_ObjectHideFlags: 0
