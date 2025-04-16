@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Weapon
   - Enemy
+  - MainMenu
+  - SettingsMenu
   layers:
   - Default
   - TransparentFX
