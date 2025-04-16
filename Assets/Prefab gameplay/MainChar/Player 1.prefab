@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2315699622508988096}
   - component: {fileID: 8423382613538722960}
   - component: {fileID: 2238864816332705556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -146,8 +146,11 @@ MonoBehaviour:
     m_Bits: 8
   hasKey: 0
   crouchSpeedMultiplier: 0.5
-  standingCollider: {fileID: 0}
-  crouchingCollider: {fileID: 0}
+  capsuleCollider: {fileID: 0}
+  standingSize: {x: 1, y: 2}
+  crouchingSize: {x: 1, y: 1}
+  standingOffset: {x: 0, y: 0}
+  crouchingOffset: {x: 0, y: -0.5}
   animator: {fileID: 2315699622508988096}
 --- !u!114 &3163440850786694257
 MonoBehaviour:
@@ -311,6 +314,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 5779140356082179621, guid: b0d91e2bf33521a489e230375fd5fce6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9081179703805069906, guid: b0d91e2bf33521a489e230375fd5fce6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -416,9 +423,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 888801094586517638, guid: dbbc12ae4a4c96f489e2a58c1608e4f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4045767987124373651, guid: dbbc12ae4a4c96f489e2a58c1608e4f4, type: 3}
       propertyPath: m_Name
       value: Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045767987124373651, guid: dbbc12ae4a4c96f489e2a58c1608e4f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
