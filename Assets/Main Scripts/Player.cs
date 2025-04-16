@@ -110,16 +110,39 @@ public class Player : Character
 
     public void AddHealthItem(HealthItem item)
     {
-        if (inventory.Count >= 4)
+        if (uiHealthItems.Count >= 4)
         {
             Debug.Log("Inventory full! Use an item to pick up more.");
             return;
         }
 
+        // Add to inventory
         inventory.Add(item);
-        Debug.Log($"Picked up {item.itemName}");
 
+        // Create UI representation
+        GameObject uiItem = new GameObject(item.itemName + "_UI");
+        RectTransform rectTransform = uiItem.AddComponent<RectTransform>();
+        uiItem.transform.SetParent(pickupSlots[uiHealthItems.Count], false);
+        
+        // Set the RectTransform properties
+        rectTransform.anchoredPosition = Vector2.zero;
+        rectTransform.sizeDelta = new Vector2(50, 50); // Set appropriate size
+        rectTransform.localScale = Vector3.one;
+
+        // Add UI Image component instead of SpriteRenderer
+        UnityEngine.UI.Image image = uiItem.AddComponent<UnityEngine.UI.Image>();
+        image.sprite = item.icon;
+        image.preserveAspect = true;
+
+        // Add to UI items list
+        uiHealthItems.Add(uiItem);
+
+        // Update counter
+        UpdateInventoryUI();
+        
+        Debug.Log($"Picked up {item.itemName} - Total items: {uiHealthItems.Count}/4");
     }
+
     public TextMeshProUGUI inventoryCounter;
 
     private void UpdateInventoryUI()
@@ -138,59 +161,80 @@ public class Player : Character
             return;
         }
 
-        float healthPercent = currentHealth / maxHealth;
-
-        HealthItem red = inventory.Find(i => i.healAmount >= 0.5f);
-        HealthItem orange = inventory.Find(i => i.healAmount >= 0.25f && i.healAmount < 0.5f);
-
-        int itemIndex = -1;
-        if (healthPercent <= 0.49f && red != null)
+        if (inventory.Count == 0)
         {
-            itemIndex = inventory.IndexOf(red);
-            Heal(red);
-            inventory.Remove(red);
-        }
-        else if (healthPercent <= 0.6f && orange != null)
-        {
-            itemIndex = inventory.IndexOf(orange);
-            Heal(orange);
-            inventory.Remove(orange);
-        }
-        else if (orange != null)
-        {
-            itemIndex = inventory.IndexOf(orange);
-            Heal(orange);
-            inventory.Remove(orange);
-        }
-        else if (red != null)
-        {
-            itemIndex = inventory.IndexOf(red);
-            Heal(red);
-            inventory.Remove(red);
-        }
-        else
-        {
-            Debug.Log("No medicine available!");
+            Debug.Log("No health items available!");
             return;
         }
 
-        // Remove the UI item
-        if (itemIndex >= 0 && itemIndex < uiHealthItems.Count)
-        {
-            Destroy(uiHealthItems[itemIndex]);
-            uiHealthItems.RemoveAt(itemIndex);
+        float healthPercent = currentHealth / maxHealth;
+        int itemIndex = -1;
+        HealthItem itemToUse = null;
 
-            // Reposition remaining items to their proper slots
-            for (int i = 0; i < uiHealthItems.Count; i++)
+        // Find appropriate item based on health percentage
+        if (healthPercent <= 0.49f)
+        {
+            // Try to find red item (50% heal) first when health is low
+            for (int i = 0; i < inventory.Count; i++)
             {
-                if (i < pickupSlots.Length)
+                if (inventory[i].healAmount >= 0.5f)
                 {
-                    uiHealthItems[i].transform.position = pickupSlots[i].position;
+                    itemToUse = inventory[i];
+                    itemIndex = i;
+                    break;
                 }
             }
         }
 
-        UpdateInventoryUI();
+        // If no red item found or health > 49%, try green item (25% heal)
+        if (itemToUse == null)
+        {
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                if (inventory[i].healAmount == 0.25f)
+                {
+                    itemToUse = inventory[i];
+                    itemIndex = i;
+                    break;
+                }
+            }
+        }
+
+        if (itemToUse != null)
+        {
+            // Apply healing
+            Heal(itemToUse);
+            
+            // Remove from inventory
+            inventory.RemoveAt(itemIndex);
+
+            // Remove UI representation
+            if (itemIndex >= 0 && itemIndex < uiHealthItems.Count)
+            {
+                // Destroy the UI object
+                Destroy(uiHealthItems[itemIndex]);
+                uiHealthItems.RemoveAt(itemIndex);
+
+                // Reposition remaining items
+                for (int i = 0; i < uiHealthItems.Count; i++)
+                {
+                    RectTransform rt = uiHealthItems[i].GetComponent<RectTransform>();
+                    uiHealthItems[i].transform.SetParent(pickupSlots[i], false);
+                    if (rt != null)
+                    {
+                        rt.anchoredPosition = Vector2.zero;
+                        rt.sizeDelta = new Vector2(50, 50);
+                        rt.localScale = Vector3.one;
+                    }
+                }
+            }
+
+            UpdateInventoryUI();
+        }
+        else
+        {
+            Debug.Log("No appropriate medicine available!");
+        }
     }
 
     // ✅ Healing helper
