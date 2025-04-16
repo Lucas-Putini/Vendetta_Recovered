@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: ba4abec4dc347284693846d69f73dea9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - messageText: {instanceID: 0}
+  - doorOpenSound: {fileID: 8300000, guid: 0a6957518d3c35649b795404ae9e1355, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

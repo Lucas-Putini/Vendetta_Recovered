@@ -1,54 +1,60 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
 
 public class Door : MonoBehaviour
 {
-    public string nextSceneName = "Level2"; // Nom de la scène suivante
-    public float messageDisplayTime = 2f; // Temps d'affichage du message en secondes
-    public TextMeshProUGUI messageText; // Référence au texte à afficher
+    public string nextSceneName = "Level2";
+    public float messageDisplayTime = 2f;
+    public TextMeshProUGUI messageText;
 
     private bool _isPlayerInRange = false;
     private bool _hasKey = false;
     private float _messageTimer = 0f;
     private bool _isShowingMessage = false;
 
+    public AudioClip doorOpenSound;
+    private AudioSource audioSource;
+
     void Start()
     {
-        // Désactiver le texte au démarrage
         if (messageText != null)
         {
             messageText.gameObject.SetActive(false);
         }
 
-        // Vérifier si la scène existe
         if (!SceneExists(nextSceneName))
         {
             Debug.LogError($"La scène '{nextSceneName}' n'existe pas dans le Build Settings !");
+        }
+
+        // Initialize audio source if available
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogWarning("AudioSource component is missing on the Door object.");
         }
     }
 
     void Update()
     {
-        // Si le joueur est dans la zone et appuie sur E
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log($"Touche E pressée. Le joueur a la clé : {_hasKey}");
-            
+
             if (_hasKey)
             {
                 Debug.Log($"Tentative de chargement de la scène : {nextSceneName}");
-                // Téléporter le joueur au début du niveau suivant
-                LoadNextScene();
+                // Play sound and load scene after sound finishes
+                StartCoroutine(LoadNextSceneCoroutine());
             }
             else
             {
-                // Afficher le message
                 ShowMessage("You need to find the key to open this door");
             }
         }
 
-        // Gérer le timer du message
         if (_isShowingMessage)
         {
             _messageTimer += Time.deltaTime;
@@ -65,8 +71,7 @@ public class Door : MonoBehaviour
         {
             _isPlayerInRange = true;
             Debug.Log("Le joueur est dans la zone de la porte");
-            
-            // Vérifier si le joueur a la clé
+
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController != null)
             {
@@ -109,9 +114,19 @@ public class Door : MonoBehaviour
         }
     }
 
-    void LoadNextScene()
+    // Coroutine that plays the sound, waits, then loads the scene
+    IEnumerator LoadNextSceneCoroutine()
     {
-        Debug.Log($"Chargement de la scène : {nextSceneName}");
+        if (audioSource != null && doorOpenSound != null)
+        {
+            audioSource.PlayOneShot(doorOpenSound);
+            yield return new WaitForSeconds(doorOpenSound.length);
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or doorOpenSound missing. Loading scene immediately.");
+        }
+
         try
         {
             SceneManager.LoadScene(nextSceneName);
@@ -122,7 +137,6 @@ public class Door : MonoBehaviour
         }
     }
 
-    // Vérifie si une scène existe dans le Build Settings
     private bool SceneExists(string sceneName)
     {
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
@@ -137,11 +151,9 @@ public class Door : MonoBehaviour
         return false;
     }
 
-    // Méthode pour dessiner des gizmos dans l'éditeur
     void OnDrawGizmosSelected()
     {
-        // Dessiner la zone de la porte
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, new Vector3(1f, 2f, 0f));
     }
-} 
+}
