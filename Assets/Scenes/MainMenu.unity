@@ -119,6 +119,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &27116456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27116458}
+  - component: {fileID: 27116457}
+  m_Layer: 0
+  m_Name: MainMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &27116457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27116456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343999de96f18142aeda7763bfeffab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &27116458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27116456}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 501.91238, y: 181.27975, z: -2.713157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &36190458
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1137,8 +1181,10 @@ MonoBehaviour:
   autoAimKey: 32
   settingsMenuUI: {fileID: 1102773916}
   mainMenuUI: {fileID: 1050997466}
-  highContrastToggle: {fileID: 1416702472}
+  highContrastToggle: {fileID: 0}
   autoAimToggle: {fileID: 50713985}
+  settingsButton: {fileID: 126237020}
+  closeSettingsButton: {fileID: 963815133}
 --- !u!4 &639832070
 Transform:
   m_ObjectHideFlags: 0
@@ -1243,7 +1289,7 @@ GameObject:
   - component: {fileID: 963815134}
   - component: {fileID: 963815133}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Close SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1496,6 +1542,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999433418}
   m_CullTransparentMesh: 1
+--- !u!1 &1020809293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1020809295}
+  - component: {fileID: 1020809294}
+  m_Layer: 0
+  m_Name: Settings menu manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1020809294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020809293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ca08ebc0246a74187f2d84fa2581f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1020809295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020809293}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 501.91238, y: 181.27975, z: -2.713157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1050997466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,8 +1599,8 @@ GameObject:
   - component: {fileID: 1050997468}
   - component: {fileID: 1050997467}
   m_Layer: 5
-  m_Name: MainMenuCanva
-  m_TagString: Untagged
+  m_Name: MainMenuUI
+  m_TagString: MainMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1615,7 +1705,7 @@ GameObject:
   - component: {fileID: 1102773918}
   m_Layer: 5
   m_Name: SettingsMenuUI
-  m_TagString: Untagged
+  m_TagString: SettingsMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2765,3 +2855,5 @@ SceneRoots:
   - {fileID: 36190461}
   - {fileID: 1102773917}
   - {fileID: 639832070}
+  - {fileID: 1020809295}
+  - {fileID: 27116458}
