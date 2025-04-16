@@ -14709,7 +14709,15 @@ PrefabInstance:
     - target: {fileID: 1735602127120455461, guid: cbe442222b17b4b4d94acbe035530df0, type: 3}
       propertyPath: doorOpenSound
       value: 
-      objectReference: {fileID: 8300000, guid: 0a6957518d3c35649b795404ae9e1355, type: 3}
+      objectReference: {fileID: 8300000, guid: f4adb7c578f93054796b7fb459e3e298, type: 3}
+    - target: {fileID: 2751935907948905185, guid: cbe442222b17b4b4d94acbe035530df0, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: f4adb7c578f93054796b7fb459e3e298, type: 3}
+    - target: {fileID: 2751935907948905185, guid: cbe442222b17b4b4d94acbe035530df0, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f4adb7c578f93054796b7fb459e3e298, type: 3}
     - target: {fileID: 2751935907948905185, guid: cbe442222b17b4b4d94acbe035530df0, type: 3}
       propertyPath: rolloffMode
       value: 1
