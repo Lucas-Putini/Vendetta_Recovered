@@ -6,10 +6,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 8f;
     public float jumpForce = 100f;
 
-    [Header("Dash Settings")]
-    public float dashSpeed = 40f;
-    public float dashDuration = 0.1f;
-    public float dashCooldown = 2f;
+    
 
     [Header("Ground Check")]
     public Transform groundCheck;
@@ -81,24 +78,9 @@ public class PlayerController : MonoBehaviour
             PlayerJump();
         }
 
-        // Handle dashing
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) && Time.time >= lastDashTime + dashCooldown)
-        {
-            StartDash(moveInput);
-        }
+        
 
-        // Handle dash duration
-        if (isDashing)
-        {
-            if (dashTimeLeft > 0)
-            {
-                dashTimeLeft -= Time.deltaTime;
-            }
-            else
-            {
-                isDashing = false;
-            }
-        }
+       
 
         // Handle crouching
         if (Input.GetKeyDown(KeyCode.S))
@@ -120,16 +102,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("jump worked");
     }
 
-    void StartDash(float moveDirection)
-    {
-        isDashing = true;
-        dashTimeLeft = dashDuration;
-        lastDashTime = Time.time;
-
-        float dashDirection = moveDirection != 0 ? moveDirection : transform.localScale.x;
-        rb.linearVelocity = new Vector2(dashDirection * dashSpeed, rb.linearVelocity.y);
-    }
-
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))

@@ -270,6 +270,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!1 &43710156
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +510,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &95343399
 Animator:
   serializedVersion: 7
@@ -1904,6 +1908,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &192712704
 Animator:
   serializedVersion: 7
@@ -2258,6 +2264,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!70 &213638930
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2804,6 +2812,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &379623919
 Animator:
   serializedVersion: 7
@@ -3190,6 +3200,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &427886730
 Animator:
   serializedVersion: 7
@@ -4765,6 +4777,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &588644987
 Animator:
   serializedVersion: 7
@@ -5129,6 +5143,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &605283341
 Animator:
   serializedVersion: 7
@@ -5888,6 +5904,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &778723237
 Animator:
   serializedVersion: 7
@@ -6311,6 +6329,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &851632538
 Animator:
   serializedVersion: 7
@@ -7007,9 +7027,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
+      propertyPath: dashSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1768798749}
+    - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
+      propertyPath: dashCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
+      propertyPath: dashDuration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4354785339935009444, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
       propertyPath: uiCanvas
       value: 
@@ -9850,6 +9882,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1399081444
 Animator:
   serializedVersion: 7
@@ -10015,6 +10049,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1432056063
 Animator:
   serializedVersion: 7
@@ -10268,6 +10304,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!70 &1492259620
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -10898,6 +10936,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1571724987
 Animator:
   serializedVersion: 7
@@ -11331,6 +11371,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1610469114
 Animator:
   serializedVersion: 7
@@ -11501,6 +11543,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1620070743
 Animator:
   serializedVersion: 7
@@ -13026,6 +13070,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1850993291
 Animator:
   serializedVersion: 7
@@ -13502,6 +13548,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1960337568
 Animator:
   serializedVersion: 7
@@ -13667,6 +13715,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &1980748017
 Animator:
   serializedVersion: 7
@@ -15336,6 +15386,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!70 &2102078743
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -15580,6 +15632,8 @@ MonoBehaviour:
   damageInterval: 0.5
   initialDamageDelay: 0
   bloodEffect: {fileID: 0}
+  bloodEffectDuration: 0.5
+  bloodScaleMultiplier: 1.2
 --- !u!95 &2112343027
 Animator:
   serializedVersion: 7
