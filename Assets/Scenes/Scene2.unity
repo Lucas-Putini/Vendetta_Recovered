@@ -7433,9 +7433,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
+      propertyPath: dashSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1768798749}
+    - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
+      propertyPath: dashCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934840214797692373, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
+      propertyPath: dashDuration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4354785339935009444, guid: 832cd248a372f4195b257b3e848a51af, type: 3}
       propertyPath: uiCanvas
       value: 
