@@ -6,6 +6,7 @@ public class EnemyMelee : MonoBehaviour
 {
     private bool playerInRange = false;
     private Transform player;
+    private EnemyStats enemyStats;
 
     [Header("Melee Attack Settings")]
     public float meleeDamage = 10f;
@@ -29,6 +30,12 @@ public class EnemyMelee : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        enemyStats = GetComponent<EnemyStats>();
+        
+        if (enemyStats == null)
+        {
+            Debug.LogError("EnemyStats component not found on EnemyMelee!");
+        }
     }
 
     void Update()
@@ -111,9 +118,17 @@ public class EnemyMelee : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        // You'd subtract health here
+        if (enemyStats != null)
+        {
+            enemyStats.TakeDamage(damage);
+        }
+        
         animator.SetTrigger("hurt");
-        // If health <= 0: Die();
+        
+        if (enemyStats != null && enemyStats.CurrentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     public void Die()
