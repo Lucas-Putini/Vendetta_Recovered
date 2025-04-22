@@ -6,7 +6,9 @@ public abstract class Character : MonoBehaviour
     public float maxHealth;
     protected float currentHealth;
     
-   
+    // Property to access currentHealth
+    public float CurrentHealth => currentHealth;
+    
     protected Rigidbody2D rb;
     
     protected virtual void Start()  // Add this!
